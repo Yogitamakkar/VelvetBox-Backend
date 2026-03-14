@@ -27,7 +27,7 @@ public class WishlistController {
         return ResponseEntity.ok(wishlist);
     }
 
-    @PostMapping("/add-product/{productId]")
+    @PostMapping("/add-product/{productId}")
     public ResponseEntity<Wishlist> addProductToWishlist(
             @PathVariable Long productId,
             @RequestHeader("Authorization") String jwt

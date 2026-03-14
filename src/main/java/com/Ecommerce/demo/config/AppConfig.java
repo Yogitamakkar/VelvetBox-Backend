@@ -24,9 +24,8 @@ public class AppConfig {
         http.sessionManagement(management -> management.sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS
         )).authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/api/products/*/reviews").permitAll()
                 .requestMatchers("/api/**").authenticated()
-                .requestMatchers("/api/products/*/reviews")
-                .permitAll()
                 .anyRequest().permitAll()
                 ).addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
                 .csrf(csrf-> csrf.disable())
@@ -39,12 +38,12 @@ public class AppConfig {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration cfg = new CorsConfiguration();
-                cfg.setAllowedOrigins(Collections.singletonList("*"));
+                cfg.setAllowedOriginPatterns(Collections.singletonList("*"));
                 cfg.setAllowedMethods(Collections.singletonList("*"));
                 cfg.setAllowedHeaders(Collections.singletonList("*"));
                 cfg.setAllowCredentials(true);
                 cfg.setExposedHeaders(Collections.singletonList("Authorization"));
-                cfg.setMaxAge(3600l);
+                cfg.setMaxAge(3600L);
                 return cfg;
             }
         };

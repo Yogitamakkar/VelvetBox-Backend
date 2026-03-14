@@ -27,6 +27,7 @@ public class OrderController {
     private final PaymentService paymentService;
     private final PaymentOrderRepository paymentOrderRepository;
 
+    @PostMapping
     public ResponseEntity<PaymentLinkResponse> createOrderHandler(@RequestBody Address ShippingAddress , @RequestParam PaymentMethod paymentMethod , @RequestHeader("Authorization") String jwt) throws Exception {
 
         User user = userService.findUserByJwt(jwt);
