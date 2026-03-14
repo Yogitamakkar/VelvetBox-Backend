@@ -121,19 +121,19 @@ public class ProductServiceImpl implements ProductService {
                 predicates.add(criteriaBuilder.equal(root.get("color"),colors));
             }
             if(sizes!= null && !sizes.isEmpty()){
-                predicates.add(criteriaBuilder.equal(root.get("size"),sizes));
+                predicates.add(criteriaBuilder.like(root.get("sizes"), "%" + sizes + "%"));
             }
             if(minPrice != null){
-                predicates.add(criteriaBuilder.equal(root.get("sellingPrice"),minPrice));
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("sellingprice"), Integer.parseInt(minPrice)));
             }
             if (maxPrice != null){
-                predicates.add(criteriaBuilder.equal(root.get("sellingPrice"),maxPrice));
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("sellingprice"), Integer.parseInt(maxPrice)));
             }
             if (minDiscount != null){
-                predicates.add(criteriaBuilder.equal(root.get("discountPrice"),minDiscount));
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("discountPercent"), minDiscount));
             }
             if (stock != null){
-                predicates.add(criteriaBuilder.equal(root.get("stock"),stock));
+                predicates.add(criteriaBuilder.greaterThan(root.get("quantity"), 0));
             }
             return criteriaBuilder.and(predicates.toArray((new Predicate[0])));
         };
@@ -148,17 +148,17 @@ public class ProductServiceImpl implements ProductService {
         }
         switch (sort){
             case "price_low":
-                return Sort.by(Sort.Direction.ASC,"price");
+                return Sort.by(Sort.Direction.ASC,"sellingprice");
             case "price_high":
-                return Sort.by(Sort.Direction.DESC,"price");
+                return Sort.by(Sort.Direction.DESC,"sellingprice");
             case "newest":
                 return Sort.by(Sort.Direction.DESC,"createdAt");
             case "popular":
-                return Sort.by(Sort.Direction.DESC,"ratingCount");
+                return Sort.by(Sort.Direction.DESC,"numRatings");
             case "rating":
-                return Sort.by(Sort.Direction.DESC,"rating");
+                return Sort.by(Sort.Direction.DESC,"numRatings");
             default:
-                return Sort.by(Sort.Direction.DESC , "rating","createdAt","price");
+                return Sort.by(Sort.Direction.DESC , "numRatings","createdAt","sellingprice");
         }
     }
 

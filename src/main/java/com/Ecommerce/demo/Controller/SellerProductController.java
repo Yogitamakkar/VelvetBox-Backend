@@ -7,7 +7,6 @@ import com.Ecommerce.demo.requests.CreateProductRequest;
 import com.Ecommerce.demo.service.ProductService;
 import com.Ecommerce.demo.service.SellerService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +35,7 @@ public class SellerProductController {
     }
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<Void> deleteProduct(Long productId) throws ProductException {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) throws ProductException {
         try{
             productService.deleteProduct(productId);
             return new ResponseEntity<>(HttpStatus.OK);

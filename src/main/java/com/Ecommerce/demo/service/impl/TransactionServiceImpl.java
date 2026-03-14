@@ -32,7 +32,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> getTransactionBySellerId(Seller seller) {
-        return transactionRepository.findBySellerID(seller.getId());
+        return transactionRepository.findBySellerId(seller.getId());
     }
 
     @Override

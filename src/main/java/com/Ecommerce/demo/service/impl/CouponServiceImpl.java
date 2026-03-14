@@ -9,10 +9,9 @@ import com.Ecommerce.demo.repository.UserRepository;
 import com.Ecommerce.demo.service.CouponService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -37,7 +36,7 @@ public class CouponServiceImpl implements CouponService {
             throw new Exception("valid for minimum order value " + coupon.getMinimumOrderValue());
         }
         if (coupon.isActive()) {
-            LocalDateTime now = LocalDateTime.now();
+            LocalDate now = LocalDate.now();
             if (now.isAfter(coupon.getValidityStartDate()) && now.isBefore(coupon.getValidityEndDate())) {
                 user.getUsedCoupons().add(coupon);
                 userRepository.save(user);
@@ -62,6 +61,7 @@ public class CouponServiceImpl implements CouponService {
         cart.setTotalSellingPrice(cart.getTotalSellingPrice()+discountedPrice);
         cart.setCouponCode(null);
         cartRepository.save(cart);
+        return cart;
     }
 
     @Override

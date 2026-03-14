@@ -23,7 +23,7 @@ public class PaymentController {
     private final SellerReportService sellerReportService;
     private final TransactionService transactionService;
 
-    @GetMapping("{paymentId}")
+    @GetMapping("/{paymentId}")
     public ResponseEntity<ApiResponse> paymentSuccessHandler(
             @PathVariable String paymentId,
             @RequestParam String paymentLinkId,

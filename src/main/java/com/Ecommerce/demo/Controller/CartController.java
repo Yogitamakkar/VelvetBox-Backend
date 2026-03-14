@@ -57,6 +57,6 @@ public class CartController {
 
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setMessage("item removed from the cart");
-        return new ResponseEntity<>(apiResponse,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(apiResponse,HttpStatus.OK);
     }
 }

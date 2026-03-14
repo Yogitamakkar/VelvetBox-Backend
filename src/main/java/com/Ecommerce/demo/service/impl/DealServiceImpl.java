@@ -39,6 +39,7 @@ public class DealServiceImpl implements DealService {
             if (deal.getCategory() != null){
                 existingDeal.setCategory(deal.getCategory());
             }
+            return dealRepository.save(existingDeal);
         }
         throw new Exception("deal not found");
     }

@@ -161,6 +161,7 @@ public class AuthServiceImpl implements AuthService {
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String roleName = authorities.isEmpty()?null:authorities.iterator().next().getAuthority();
+        authResponse.setRole(USER_ROLE.valueOf(roleName));
         return authResponse;
         }
 
@@ -199,6 +200,7 @@ public class AuthServiceImpl implements AuthService {
         AuthResponse authResponse = new AuthResponse();
         authResponse.setMessage("Login successful using the password");
         authResponse.setJwt(token);
+        authResponse.setRole(role);
         return authResponse;
     }
 

@@ -17,7 +17,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> , JpaSpec
             "LOWER(p.title) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
             "LOWER(p.description) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
             "LOWER(p.color) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-            "LOWER(p.category) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(p.category.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
             "LOWER(p.sizes) LIKE LOWER(CONCAT('%', :query, '%'))"
     )
     List<Product> searchProducts(@Param("query") String query);

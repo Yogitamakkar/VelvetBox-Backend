@@ -114,7 +114,7 @@ public class SellerServiceImpl implements SellerService {
             existingSeller.getPickUpAddress().setPincode(seller.getPickUpAddress().getPincode());
         }
 
-        return sellerRepository.save(seller);
+        return sellerRepository.save(existingSeller);
     }
 
     @Override

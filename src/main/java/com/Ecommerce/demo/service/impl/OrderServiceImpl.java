@@ -34,16 +34,17 @@ public class OrderServiceImpl implements OrderService {
         for (Map.Entry<Long,List<CartItem>> entry : itemsBySeller.entrySet()){
             Long sellerId = entry.getKey();
             List<CartItem> items = entry.getValue();
-            int totalOrderPrice  = items.stream().mapToInt(
+            int totalSellingPrice = items.stream().mapToInt(
                     CartItem::getSellingPrice
             ).sum();
+            int totalMrpPrice = items.stream().mapToInt(CartItem::getMrpPrice).sum();
             int totalItem = items.stream().mapToInt(CartItem::getQuantity).sum();
 
             Order createdOrder = new Order();
             createdOrder.setUser(user);
             createdOrder.setSellerId(sellerId);
-            createdOrder.setTotalMrpPrice(totalOrderPrice);
-            createdOrder.setTotalSellingPrice(totalOrderPrice);
+            createdOrder.setTotalMrpPrice(totalMrpPrice);
+            createdOrder.setTotalSellingPrice(totalSellingPrice);
             createdOrder.setTotalItems(totalItem);
             createdOrder.setShippingAddress(shippingAddress);
             createdOrder.setOrderStatus(OrderStatus.PENDING);

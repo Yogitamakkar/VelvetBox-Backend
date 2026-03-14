@@ -7,7 +7,6 @@ import com.Ecommerce.demo.model.HomeCategory;
 import com.Ecommerce.demo.repository.DealRepository;
 import com.Ecommerce.demo.service.HomeService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.event.internal.DefaultAutoFlushEventListener;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -34,7 +34,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentOrder createOrder(User user, Set<Order> orders) {
-        Long amount = orders.stream().mapToLong(Order::getTotalSellingPrice).sum();
+        Long amount = orders.stream().mapToLong(o -> o.getTotalSellingPrice() != null ? o.getTotalSellingPrice() : 0).sum();
 
         PaymentOrder paymentOrder = new PaymentOrder();
         paymentOrder.setUser(user);
