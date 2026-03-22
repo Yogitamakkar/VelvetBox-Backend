@@ -24,7 +24,7 @@ public class EmailService {
             javaMailSender.send(mimeMessage);
         }catch (Exception e){
             System.out.println("error: " + e);
-            throw new Exception();
+            throw new Exception("Failed to send OTP email. Please check mail server configuration.");
         }
     }
 }
