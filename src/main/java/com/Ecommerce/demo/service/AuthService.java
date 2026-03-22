@@ -7,7 +7,7 @@ import com.Ecommerce.demo.response.AuthResponse;
 import com.Ecommerce.demo.requests.SignUpRequest;
 
 public interface AuthService {
-    void sentLoginOtp(String email, USER_ROLE role) throws Exception;
+    void sentLoginOtp(String email, USER_ROLE role, String purpose) throws Exception;
     String createUser(SignUpRequest req) throws Exception;
     AuthResponse signIn(OtpLoginRequest req) throws Exception;
     AuthResponse logInWithPassword(PasswordLoginRequest req) throws Exception;

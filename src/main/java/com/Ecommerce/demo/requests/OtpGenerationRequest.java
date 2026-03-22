@@ -7,4 +7,5 @@ import lombok.Data;
 public class OtpGenerationRequest {
     private String email;
     private USER_ROLE role;
+    private String purpose; // "login" or "signup"
 }

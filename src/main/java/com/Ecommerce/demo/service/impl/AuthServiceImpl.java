@@ -44,34 +44,19 @@ public class AuthServiceImpl implements AuthService {
 
     //otp generated
     @Override
-    public void sentLoginOtp(String email,USER_ROLE role) throws Exception {
-//        String SIGNIN_PREFIX = "signin_";
-//        if (email.startsWith(SIGNIN_PREFIX)){
-//            email = email.substring(SIGNIN_PREFIX.length());
-//
-//            if(role.equals(USER_ROLE.ROLE_SELLER)){
-//                Seller seller = sellerRepository.findByEmail(email);
-//                if (seller ==  null){
-//                    throw new Exception("seller not found by this email..");
-//                }
-//            }
-//            else{
-//                User user = userRepository.findByEmail(email);
-//                if (user == null){
-//                    throw new Exception("user not found by this email");
-//                }
-//            }
-//
-//        }
-        if(role.equals(USER_ROLE.ROLE_SELLER)){
-            Seller seller = sellerRepository.findByEmail(email);
-            if(seller == null){
-                throw new Exception("Seller not found with this email ");
-            }
-        }else{
-            User user = userRepository.findByEmail(email);
-            if(user== null){
-                throw new Exception("user not found with this email ");
+    public void sentLoginOtp(String email,USER_ROLE role, String purpose) throws Exception {
+        // Only check if user exists when logging in, not during signup
+        if (!"signup".equalsIgnoreCase(purpose)) {
+            if(role.equals(USER_ROLE.ROLE_SELLER)){
+                Seller seller = sellerRepository.findByEmail(email);
+                if(seller == null){
+                    throw new Exception("Seller not found with this email ");
+                }
+            }else{
+                User user = userRepository.findByEmail(email);
+                if(user== null){
+                    throw new Exception("user not found with this email ");
+                }
             }
         }
         VerificationCode existingOtp = verificationCodeRepository.findByEmail(email);
